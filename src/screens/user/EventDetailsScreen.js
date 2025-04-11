@@ -13,6 +13,7 @@ import {
   Share,
   Animated
 } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import theme from '../../constants/theme';
 
 const { width } = Dimensions.get('window');
@@ -158,18 +159,19 @@ const EventDetailsScreen = ({ route, navigation }) => {
           {/* Back button on image */}
           <SafeAreaView style={styles.imageHeaderContainer}>
             <View style={styles.imageHeaderContent}>
-              <TouchableOpacity 
-                onPress={() => navigation.goBack()}
-                style={styles.imageButton}
-              >
-                <Text style={styles.imageButtonIcon}>←</Text>
-              </TouchableOpacity>
-              <TouchableOpacity 
-                onPress={handleShare}
-                style={styles.imageButton}
-              >
-                <Text style={styles.imageButtonIcon}>↗</Text>
-              </TouchableOpacity>
+            <TouchableOpacity 
+              onPress={() => navigation.goBack()}
+              style={styles.imageButton}
+            >
+              <MaterialCommunityIcons name="arrow-left" size={24} color={theme.COLORS.textDark} />
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              onPress={handleShare}
+              style={styles.imageButton}
+            >
+              <MaterialCommunityIcons name="share-variant" size={24} color={theme.COLORS.textDark} />
+            </TouchableOpacity>
             </View>
           </SafeAreaView>
           
@@ -193,43 +195,48 @@ const EventDetailsScreen = ({ route, navigation }) => {
         
         {/* Event Info */}
         <View style={styles.infoContainer}>
-          <View style={styles.titleSection}>
-            <Text style={styles.title}>{event.title}</Text>
-            <View style={styles.ratingContainer}>
-              <Text style={styles.ratingStars}>★★★★★</Text>
-              <Text style={styles.ratingText}>
-                {event.reviews.average} ({event.reviews.count})
-              </Text>
+          <View style={styles.ratingContainer}>
+            <View style={styles.ratingStars}>
+              <MaterialCommunityIcons name="star" size={16} color={theme.COLORS.warning} />
+              <MaterialCommunityIcons name="star" size={16} color={theme.COLORS.warning} />
+              <MaterialCommunityIcons name="star" size={16} color={theme.COLORS.warning} />
+              <MaterialCommunityIcons name="star" size={16} color={theme.COLORS.warning} />
+              <MaterialCommunityIcons name="star-half" size={16} color={theme.COLORS.warning} />
             </View>
+            <Text style={styles.ratingText}>
+              {event.reviews.average} ({event.reviews.count})
+            </Text>
           </View>
           
           {/* Date, Time, Location info */}
           <View style={styles.detailsCard}>
-            <View style={styles.detailRow}>
-              <View style={styles.detailIconContainer}>
-                <Text style={styles.detailIcon}>📅</Text>
-              </View>
-              <View style={styles.detailContent}>
-                <Text style={styles.detailLabel}>Date & Time</Text>
-                <Text style={styles.detailText}>{formattedDate} • {formattedTime}</Text>
-              </View>
+          <View style={styles.detailRow}>
+            <View style={styles.detailIconContainer}>
+              <MaterialCommunityIcons name="calendar" size={20} color={theme.COLORS.accent} />
             </View>
+            <View style={styles.detailContent}>
+              <Text style={styles.detailLabel}>Date & Time</Text>
+              <Text style={styles.detailText}>
+                {formattedDate} • {formattedTime}
+              </Text>
+            </View>
+          </View>
             
             <View style={styles.divider} />
             
             <View style={styles.detailRow}>
-              <View style={styles.detailIconContainer}>
-                <Text style={styles.detailIcon}>📍</Text>
-              </View>
-              <View style={styles.detailContent}>
-                <Text style={styles.detailLabel}>Venue</Text>
-                <Text style={styles.detailText}>{event.venue}</Text>
-                <Text style={styles.detailSubtext}>{event.location}</Text>
-              </View>
-              <TouchableOpacity style={styles.directionButton}>
-                <Text style={styles.directionButtonText}>Directions</Text>
-              </TouchableOpacity>
+            <View style={styles.detailIconContainer}>
+              <MaterialCommunityIcons name="map-marker" size={20} color={theme.COLORS.accent} />
             </View>
+            <View style={styles.detailContent}>
+              <Text style={styles.detailLabel}>Venue</Text>
+              <Text style={styles.detailText}>{event.venue}</Text>
+              <Text style={styles.detailSubtext}>{event.location}</Text>
+            </View>
+            <TouchableOpacity style={styles.directionButton}>
+              <Text style={styles.directionButtonText}>Directions</Text>
+            </TouchableOpacity>
+          </View>
           </View>
           
           {/* About Section */}

@@ -1,64 +1,72 @@
-// src/components/common/CategoryItem.js
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View, Text, Dimensions } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import theme from '../../constants/theme';
 
-const { width } = Dimensions.get('window');
-const categoryWidth = width / 4 - 16;
-
 const CategoryItem = ({ category, onPress }) => {
-  // Get icon emoji based on category name
-  const getIcon = () => {
-    switch (category.id) {
-      case 1: return '🎵'; // Concerts
-      case 2: return '🎭'; // Theater & Arts
-      case 3: return '🏀'; // Sports
-      case 4: return '👪'; // Family
-      case 5: return '😂'; // Comedy
-      case 6: return '💼'; // Conferences
-      default: return '🎟️';
-    }
+  // Map category names to professional icons
+  const getIconName = (categoryName) => {
+    const iconMap = {
+      'Music': 'music',
+      'Sports': 'basketball',
+      'Arts': 'palette',
+      'Nightlife': 'glass-cocktail',
+      'Business': 'briefcase',
+      'Education': 'school',
+      'Theater': 'theater',
+      'Technology': 'laptop',
+      'Food': 'food-fork-drink',
+
+    };
+    
+    return iconMap[categoryName] || 'tag'; // Fallback icon
   };
 
   return (
     <TouchableOpacity 
+      style={styles.categoryItem} 
       onPress={() => onPress(category)}
-      style={styles.container}
-      activeOpacity={0.8}
     >
       <View style={styles.iconContainer}>
-        <Text style={styles.icon}>{getIcon()}</Text>
+        <MaterialCommunityIcons 
+          name={getIconName(category.name)} 
+          size={24} 
+          color={theme.COLORS.primary} 
+        />
       </View>
-      <Text style={styles.text} numberOfLines={1}>{category.name}</Text>
+      <Text style={styles.categoryText}>{category.name}</Text>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: categoryWidth,
+  categoryItem: {
     alignItems: 'center',
-    marginHorizontal: theme.SPACING.s,
-    marginVertical: theme.SPACING.m,
+    marginHorizontal: 12,
+    marginVertical: 8,
+    width: 80,
   },
   iconContainer: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
     backgroundColor: theme.COLORS.cardBackground,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: theme.SPACING.s,
-    ...theme.SHADOWS.small
+    marginBottom: 8,
+    shadowColor: theme.COLORS.primary,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+    borderWidth: 1,
+    borderColor: 'rgba(0,0,0,0.05)',
   },
-  icon: {
-    fontSize: 28,
-  },
-  text: {
+  categoryText: {
     fontSize: 12,
-    fontWeight: theme.FONTS.medium,
-    textAlign: 'center',
+    fontWeight: '600',
     color: theme.COLORS.textDark,
+    textAlign: 'center',
   },
 });
 

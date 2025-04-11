@@ -1,4 +1,10 @@
+
+
 {
   "name": "Ehjozli",
-  "displayName": "Ehjozli"
+  "displayName": "Ehjozli",
+  "resources": {
+    "android": ["./android/app/src/main/res"],
+    "ios": ["./ios/YourApp/Images.xcassets"]
+  }
 }

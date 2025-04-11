@@ -4,7 +4,7 @@ import { View, StyleSheet, Image, TouchableOpacity, Text, Dimensions } from 'rea
 import theme from '../../constants/theme';
 
 const { width } = Dimensions.get('window');
-const cardWidth = width * 0.85;
+const cardWidth = width * 0.75;
 
 const EventCard = ({ event, onPress, style, featured = false }) => {
   // Format date for display
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     width: cardWidth,
     borderRadius: theme.BORDER_RADIUS.m,
     backgroundColor: theme.COLORS.cardBackground,
-    marginHorizontal: 10,
+    marginHorizontal: 20,
     marginVertical: 10,
     overflow: 'hidden',
     ...theme.SHADOWS.medium

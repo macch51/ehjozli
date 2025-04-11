@@ -14,12 +14,14 @@ import {
   Platform
 } from 'react-native';
 import theme from '../../constants/theme';
-// Import components
 import EventCard from '../../components/common/EventCard';
 import CategoryItem from '../../components/common/CategoryItem';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 // Import mock data
-import { events, categories } from '../../data/mockData';
+import { events, categories, categoriestab } from '../../data/mockData';
+import FooterNavigation from '../../components/common/FooterNavigation';
 
 const { width } = Dimensions.get('window');
 const cardWidth = width * 0.85;
@@ -56,20 +58,18 @@ const HomeScreen = ({ navigation }) => {
   });
   
   const handleEventPress = (event) => {
-    console.log('Event pressed:', event.title);
     // In a real app, this would navigate to the event details screen
-    // navigation.navigate('EventDetails', { eventId: event.id });
+     navigation.navigate('EventDetails', { eventId: event.id });
   };
   
   const handleCategoryPress = (category) => {
     console.log('Category pressed:', category.name);
     // In a real app, this would navigate to the categories screen or filter events
-    // navigation.navigate('Categories', { selectedCategory: category });
+     navigation.navigate('Categories', { selectedCategory: category });
   };
   
   const handleLocationPress = () => {
     console.log('Location pressed');
-    // In a real app, this would open a location selector modal
   };
   
   const renderDateItem = ({ item, index }) => {
@@ -117,11 +117,11 @@ const HomeScreen = ({ navigation }) => {
       {/* Top Bar */}
       <View style={styles.topBar}>
       <View style={styles.appLogoContainer}>
-        <Image 
-          source={require('../../assets/logo.png')} 
-          style={styles.logoImage}
-          resizeMode="contain"
-        />
+      <Image
+        source={require('../../assets/logo.png')}
+        style={styles.logoImage}
+        resizeMode="contain"
+      />
       </View>
 
         <View style={styles.locationButtonContainer}>
@@ -165,8 +165,7 @@ const HomeScreen = ({ navigation }) => {
                 All
               </Text>
             </TouchableOpacity>
-            
-            {categories.map((category, index) => (
+            {categoriestab.map((category, index) => (
               <TouchableOpacity 
                 key={category.id}
                 style={[styles.mainCategoryTab, activeCategory === index + 1 && styles.activeTab]}
@@ -177,6 +176,7 @@ const HomeScreen = ({ navigation }) => {
                 </Text>
               </TouchableOpacity>
             ))}
+
           </ScrollView>
         </View>
         
@@ -189,7 +189,6 @@ const HomeScreen = ({ navigation }) => {
             showsHorizontalScrollIndicator={false}
             keyExtractor={item => item.id.toString()}
             contentContainerStyle={styles.centeredList}
-            style={{ width: width * 0.95 }}
             renderItem={({ item }) => (
               <EventCard 
                 event={item} 
@@ -332,33 +331,12 @@ const HomeScreen = ({ navigation }) => {
         <View style={{ height: 80 }} />
       </ScrollView>
       
-      {/* Footer Navigation */}
-      <View style={styles.footer}>
-        <TouchableOpacity style={styles.footerTab}>
-          <Text style={styles.footerIcon}>🏠</Text>
-          <Text style={[styles.footerText, styles.activeFooterText]}>Home</Text>
-        </TouchableOpacity>
-        
-        <TouchableOpacity style={styles.footerTab}>
-          <Text style={styles.footerIcon}>🔍</Text>
-          <Text style={styles.footerText}>Explore</Text>
-        </TouchableOpacity>
-        
-        <TouchableOpacity style={styles.footerTab}>
-          <Text style={styles.footerIcon}>🎟️</Text>
-          <Text style={styles.footerText}>Tickets</Text>
-        </TouchableOpacity>
-        
-        <TouchableOpacity style={styles.footerTab}>
-          <Text style={styles.footerIcon}>❤️</Text>
-          <Text style={styles.footerText}>Saved</Text>
-        </TouchableOpacity>
-        
-        <TouchableOpacity style={styles.footerTab}>
-          <Text style={styles.footerIcon}>👤</Text>
-          <Text style={styles.footerText}>Profile</Text>
-        </TouchableOpacity>
-      </View>
+          
+    {/* Footer Navigation */}
+    <FooterNavigation
+        navigation={navigation} 
+        activeTab="home" 
+      />
     </SafeAreaView>
   );
 };
@@ -379,8 +357,8 @@ const styles = StyleSheet.create({
     borderBottomColor: '#f0f0f0',
   },
   logoImage: {
-    width: 110, // Adjust based on your logo size
-    height: 30, // Adjust based on your logo size
+    width: 80, // Adjust based on your logo size
+    height: 40, // Adjust based on your logo size
   },
   appLogoContainer: {
     flex: 1, // Takes up 1/3 of the space
@@ -495,7 +473,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   centeredList: {
-    paddingHorizontal: (width - cardWidth) / 2, 
+    paddingHorizontal: 10, 
     paddingVertical: 8,
   },
   carouselIndicators: {
@@ -569,6 +547,15 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#999',
     marginTop: 2,
+  },
+  categoryIcon: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: theme.COLORS.primaryLight,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 8,
   },
   announcementText: {
     fontSize: 14,

@@ -1,5 +1,5 @@
 // Event Categories
-export const categories = [
+export const categoriestab = [
   { id: 1, name: 'Concerts', icon: 'music' },
   { id: 2, name: 'Theater & Arts', icon: 'theater-masks' },
   { id: 3, name: 'Sports', icon: 'basketball-ball' },
@@ -7,6 +7,17 @@ export const categories = [
   { id: 5, name: 'Comedy', icon: 'laugh' },
   { id: 6, name: 'Conferences', icon: 'briefcase' },
 ];
+
+// Event Categories
+export const categories = [
+  { id: '1', name: 'Music', icon: 'music', iconType: 'material' },
+  { id: '2', name: 'Sports', icon: 'basketball', iconType: 'material' },
+  { id: '3', name: 'Arts', icon: 'palette', iconType: 'material' },
+  { id: '4', name: 'Food', icon: 'food', iconType: 'material' },
+  { id: '5', name: 'Nightlife', icon: 'glass-cocktail', iconType: 'material' },
+  { id: '6', name: 'Business', icon: 'briefcase', iconType: 'material' },
+];
+
 
 // Locations
 export const locations = [
